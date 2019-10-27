@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Order Panel</title>
+</head>
+<body>
+    <div id="message-container">
+        Messages:
+    </div>
+</body>
+<script>
+    let panelId = "{{ panel_id }}";
+
+    let panelSocket = new WebSocket(
+        "ws://" + window.location.host +
+        "/ws/panel/" + panelId + "/"
+    );
+
+    window.appendMessage = function(message) {
+        let div = document.createElement("div");
+        let text = new Date().toISOString() + ": " + message;
+        let content = document.createTextNode(text);
+        div.appendChild(content);
+        document.querySelector("#message-container").appendChild(div);
+    };
+
+    panelSocket.onmessage = function(e) {
+        let json = JSON.parse(e.data);
+        window.appendMessage(JSON.stringify(json));
+    };
+
+    panelSocket.onclose = function(e) {
+        window.appendMessage("WebSocket closed.");
+    };
+</script>
+</html>
