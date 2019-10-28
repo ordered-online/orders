@@ -9,5 +9,5 @@ urlpatterns = []
 
 if settings.DEBUG:
     urlpatterns.append(
-        path('debug/<panel_id>/', views.debug_panel)
+        path('debug/<session_id>/', views.debug_session)
     )

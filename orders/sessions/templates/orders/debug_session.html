@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Debug Order Panel</title>
+    <title>Debug Order Session</title>
 </head>
 <body>
     <div id="message-container">
@@ -10,11 +10,11 @@
     </div>
 </body>
 <script>
-    let panelId = "{{ panel_id }}";
+    let sessionId = "{{ session_id }}";
 
-    let panelSocket = new WebSocket(
+    let sessionSocket = new WebSocket(
         "ws://" + window.location.host +
-        "/ws/panel/" + panelId + "/"
+        "/ws/session/" + sessionId + "/"
     );
 
     window.appendMessage = function(message) {
@@ -25,12 +25,12 @@
         document.querySelector("#message-container").appendChild(div);
     };
 
-    panelSocket.onmessage = function(e) {
+    sessionSocket.onmessage = function(e) {
         let json = JSON.parse(e.data);
         window.appendMessage(JSON.stringify(json));
     };
 
-    panelSocket.onclose = function(e) {
+    sessionSocket.onclose = function(e) {
         window.appendMessage("WebSocket closed.");
     };
 </script>
