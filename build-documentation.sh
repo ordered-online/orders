@@ -5,6 +5,7 @@ git clone https://fkasy:${GITHUB_TOKEN}@github.com/ordered-online/documentation 
 cd tmp
 
 cp ../README.md ${SERVICE}.md
+cp ../assets/* assets/
 
 ls -la
 
