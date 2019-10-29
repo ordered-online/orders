@@ -7,12 +7,12 @@ This django based micro service provides an API to obtain orders placed at a loc
 ![order panel scheme](assets/order-panel-scheme.png)
 
 The core idea of this service is to allow order placement. Here is the workflow:
-1. The location representative authenticates himself and opens the order panel. The order panel contains `OrderSessions`, which each have a state: `opened`, `verified`, `closed` (see layout).
-2. In the order panel, the location representative creates an order session with an identifier (e.g. "Table 2"). The order session is now `opened`. The order session automatically obtains a (qr renderable) code from the `codes` service. In the UI of the location representative, a WebSocket ist opened, which connects to the endpoint for the order session and therefore receives all messages, which are related to this order session (i.e., verification and orders themselves). 
+1. The location representative authenticates himself and opens the order panel. The order panel contains `OrderSessions`, which each have a state: `open` and `closed` (see layout).
+2. In the order panel, the location representative creates an order session with an identifier (e.g. "Table 2"). The order session is now `open`. The order session automatically obtains a (qr renderable) code from the `codes` service. In the UI of the location representative, a WebSocket ist opened, which connects to the endpoint for the order session and therefore receives all messages, which are related to this order session (i.e., orders themselves). 
 3. Clicking the order session in the leftmost column triggers a modal to be presented, which contains the QR code.
-4. User scans this QR code and sends the confirmation to the orders endpoint. The orders service pushes this confirmation to the WebSocket channel for the order session, so that the location representative's UI knows, that the session is now `verified`. The user connects to the same WebSocket channel, so that user and location representative are connected with each other from now on.
+4. User scans this QR code. The user connects to the same WebSocket channel by the obtained code, so that user and location representative are connected with each other from now on.
 5. The user can order products (these products are inferred by the `products` service) and those orders are pushed to the corresponding WebSocket channel, so that they are displayable by the location representative's UI.
-6. The location representative can see all orders of a session in a modal, which is presented, when clicking on the corresponding order session in the `verified` column.
+6. The location representative can see all orders of a session in a modal, which is presented, when clicking on the corresponding session.
 7. The location representative can close the order session. This posts a message to the user's WebSocket connection and triggers a UI change on the user side, which indicates, that the session was closed.
 
 ## Technology Stack

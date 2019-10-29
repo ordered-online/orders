@@ -15,8 +15,8 @@ class SessionConsumer(WebsocketConsumer):
         # reject all connections to erroneous session codes
         try:
             self.session = Session.objects.get(code__exact=self.session_code)
-        except Session.DoesNotExist as e:
-            self.close()
+        except Session.DoesNotExist:
+            self.close(code=404)
             return
 
         # join session group
