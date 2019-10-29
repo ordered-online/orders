@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.template.response import TemplateResponse
 
 from . import settings
-from .models import Session
+from .models import Session, Order
 
 
 class SuccessResponse(JsonResponse):
@@ -163,3 +163,31 @@ def create_session(request) -> JsonResponse:
     )
 
     return SuccessResponse(session.dict_representation)
+
+
+def create_order(request, session_code) -> JsonResponse:
+    """Create an order via POST."""
+
+    if request.method != "POST":
+        return IncorrectAccessMethod()
+
+    try:
+        data = json.loads(request.body)
+    except JSONDecodeError:
+        return MalformedJson()
+
+    product_id = data.get("product_id")
+
+    try:
+        session = Session.objects.get(pk=session_code)
+    except Session.DoesNotExist:
+        return IncorrectCredentials()
+
+    Order.objects.create(
+        product_id=product_id,
+        session=session
+    )
+
+    return SuccessResponse(session.dict_representation)
+
+
