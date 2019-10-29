@@ -12,6 +12,7 @@ ls -la
 git status
 
 git add ${SERVICE}.md
+git add assets/*
 
 git commit -m "Build Documentation on ${SERVICE} from Travis CI"
 
