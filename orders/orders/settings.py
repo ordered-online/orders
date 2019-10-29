@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'orders',
-    'sessions',
 
     'channels',
 ]
@@ -136,3 +135,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+VERIFICATION_SERVICE_URL = os.environ.get("VERIFICATION_SERVICE_URL", default="http://127.0.0.1:8000")
+LOCATIONS_SERVICE_URL = os.environ.get("LOCATIONS_SERVICE_URL", default="http://127.0.0.1:8001")
+CODES_SERVICE_URL = os.environ.get("CODES_SERVICE_URL", default="http://127.0.0.1:8002")
+PRODUCTS_SERVICE_URL = os.environ.get("PRODUCTS_SERVICE_URL", default="http://127.0.0.1:8003")

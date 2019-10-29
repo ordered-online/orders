@@ -10,11 +10,11 @@
     </div>
 </body>
 <script>
-    let sessionId = "{{ session_id }}";
+    let sessionCode = "{{ session_code }}";
 
     let sessionSocket = new WebSocket(
         "ws://" + window.location.host +
-        "/ws/session/" + sessionId + "/"
+        "/ws/session/" + sessionCode + "/"
     );
 
     window.appendMessage = function(message) {

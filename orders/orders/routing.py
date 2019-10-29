@@ -1,12 +1,14 @@
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
+from django.urls import re_path
 
-from sessions import routing as session_routing
+from . import consumers
+
 
 application = ProtocolTypeRouter({
     'websocket': AuthMiddlewareStack(
-        URLRouter(
-            session_routing.websocket_urlpatterns
-        )
+        URLRouter([
+            re_path(r'ws/session/(?P<session_code>\w+)/$', consumers.SessionConsumer),
+        ])
     )
 })

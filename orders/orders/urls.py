@@ -14,11 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+
+from . import settings, views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('sessions/', include('sessions.urls')),
+    path('orders/sessions/create/', views.create_session, name="create_session"),
 ]
+
+if settings.DEBUG:
+    urlpatterns.append(
+        path('orders/sessions/debug/<session_code>/', views.debug_session, name="debug_session")
+    )
