@@ -19,6 +19,8 @@ The core idea of this service is to allow order placement. Here is the workflow:
 
 - Python 3
 - Django
+- WebSockets
+- Redis as the backend for Django Channels
 
 ## Quickstart
 
