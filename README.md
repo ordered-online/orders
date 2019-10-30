@@ -36,7 +36,7 @@ $ python3 manage.py migrate
 $ python3 manage.py runserver 127.0.0.1:8004
 ```
 
-Make sure, that the channel layer can commmunicate with the redis service.
+Make sure, that the channel layer can communicate with the redis service.
 ```
 $ python3 manage.py shell
 
