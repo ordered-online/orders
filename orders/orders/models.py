@@ -1,8 +1,10 @@
-import json
 from enum import Enum
 
-from django.core import serializers
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.forms import model_to_dict
 from django.utils import timezone
 
@@ -48,6 +50,22 @@ class Session(models.Model):
         session_dict["timestamp"] = session_dict["timestamp"].isoformat()
         return session_dict
 
+    @property
+    def group_name(self):
+        return "session_{}".format(self.code)
+
+    def broadcast_session_update(self):
+        """Broadcast session updates to the channel layer."""
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            self.group_name, {"type": "session_update", "session": self.dict_representation}
+        )
+
+
+@receiver(post_save, sender=Session, dispatch_uid="session_post_save")
+def session_post_save(sender, instance, **kwargs):
+    instance.broadcast_session_update()
+
 
 class Order(models.Model):
 
@@ -68,3 +86,8 @@ class Order(models.Model):
         order_dict = model_to_dict(self)
         order_dict["timestamp"] = order_dict["timestamp"].isoformat()
         return order_dict
+
+
+@receiver(post_save, sender=Order, dispatch_uid="order_post_save")
+def order_post_save(sender, instance, **kwargs):
+    instance.session.broadcast_session_update()

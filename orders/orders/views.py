@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.template.response import TemplateResponse
 
 from . import settings
-from .models import Session, Order
+from .models import Session, Order, SessionState
 
 
 class SuccessResponse(JsonResponse):
@@ -55,6 +55,10 @@ class LocationServiceUnavailable(AbstractFailureResponse):
 
 class CodeServiceUnavailable(AbstractFailureResponse):
     reason = "code_service_unavailable"
+
+
+class SessionNotFound(AbstractFailureResponse):
+    reason = "session_not_found"
 
 
 def debug_session(request, session_code) -> TemplateResponse:
@@ -122,6 +126,37 @@ def fetch_code() -> str:
         raise ValueError()
 
 
+def get_session(request, session_code) -> JsonResponse:
+    """Get a session via GET."""
+
+    if request.method != "GET":
+        return IncorrectAccessMethod()
+
+    try:
+        session = Session.objects.get(code__exact=session_code)
+    except Session.DoesNotExist:
+        return SessionNotFound()
+
+    return SuccessResponse(session.dict_representation)
+
+
+def close_session(request, session_code) -> JsonResponse:
+    """Close a session via POST."""
+
+    if request.method != "POST":
+        return IncorrectAccessMethod()
+
+    try:
+        session = Session.objects.get(code__exact=session_code)
+    except Session.DoesNotExist:
+        return SessionNotFound()
+
+    session.state = SessionState.CLOSED.value
+    session.save()
+
+    return SuccessResponse(session.dict_representation)
+
+
 def create_session(request) -> JsonResponse:
     """Create a session via POST."""
 
@@ -165,7 +200,7 @@ def create_session(request) -> JsonResponse:
     return SuccessResponse(session.dict_representation)
 
 
-def create_order(request, session_code) -> JsonResponse:
+def create_order(request) -> JsonResponse:
     """Create an order via POST."""
 
     if request.method != "POST":
@@ -177,6 +212,9 @@ def create_order(request, session_code) -> JsonResponse:
         return MalformedJson()
 
     product_id = data.get("product_id")
+    session_code = data.get("session_code")
+    if not product_id or not session_code:
+        return MalformedJson()
 
     try:
         session = Session.objects.get(pk=session_code)
@@ -189,5 +227,3 @@ def create_order(request, session_code) -> JsonResponse:
     )
 
     return SuccessResponse(session.dict_representation)
-
-

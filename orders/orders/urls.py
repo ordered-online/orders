@@ -23,6 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('orders/sessions/create/', views.create_session, name="create_session"),
+    path('orders/sessions/get/<session_code>/', views.get_session, name="get_session"),
+    path('orders/sessions/close/<session_code>/', views.close_session, name="close_session"),
+    path('orders/create/', views.create_order, name="create_order"),
 ]
 
 if settings.DEBUG:

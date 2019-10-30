@@ -10,7 +10,6 @@ class SessionConsumer(WebsocketConsumer):
 
     def connect(self):
         self.session_code = self.scope["url_route"]["kwargs"]["session_code"]
-        self.session_group_name = "session_%s" % self.session_code
 
         # reject all connections to erroneous session codes
         try:
@@ -21,7 +20,7 @@ class SessionConsumer(WebsocketConsumer):
 
         # join session group
         async_to_sync(self.channel_layer.group_add)(
-            self.session_group_name, self.channel_name
+            self.session.group_name, self.channel_name
         )
 
         self.accept()
@@ -30,13 +29,19 @@ class SessionConsumer(WebsocketConsumer):
 
     def disconnect(self, code):
         async_to_sync(self.channel_layer.group_discard)(
-            self.session_group_name, self.channel_name
+            self.session.group_name, self.channel_name
         )
 
-    def session_message(self, event):
-        message = event["message"]
+    def session_update(self, event):
+        """
+        Called when the session updates.
+
+        A session updates, when its state changes
+        or when orders are placed.
+        """
+        session = event["session"]
 
         # forward message to websocket
         self.send(text_data=json.dumps({
-            "message": message
+            "session": session
         }))
