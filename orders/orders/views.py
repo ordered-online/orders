@@ -2,6 +2,7 @@ import json
 from json import JSONDecodeError
 
 import requests
+from django.db import IntegrityError
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.template.response import TemplateResponse
@@ -59,6 +60,10 @@ class CodeServiceUnavailable(AbstractFailureResponse):
 
 class SessionNotFound(AbstractFailureResponse):
     reason = "session_not_found"
+
+
+class DuplicateSession(AbstractFailureResponse):
+    reason = "duplicate_session"
 
 
 def debug_session(request, session_code) -> TemplateResponse:
@@ -191,11 +196,14 @@ def create_session(request) -> JsonResponse:
     except (requests.ConnectionError, ValueError):
         return CodeServiceUnavailable()
 
-    session = Session.objects.create(
-        name=name,
-        code=code,
-        location_id=location_id,
-    )
+    try:
+        session = Session.objects.create(
+            name=name,
+            code=code,
+            location_id=location_id,
+        )
+    except IntegrityError:
+        return DuplicateSession()
 
     return SuccessResponse(session.dict_representation)
 
@@ -219,7 +227,7 @@ def create_order(request) -> JsonResponse:
     try:
         session = Session.objects.get(pk=session_code)
     except Session.DoesNotExist:
-        return IncorrectCredentials()
+        return SessionNotFound()
 
     Order.objects.create(
         product_id=product_id,

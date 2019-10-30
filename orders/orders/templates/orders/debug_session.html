@@ -27,10 +27,12 @@
 
     sessionSocket.onmessage = function(e) {
         let json = JSON.parse(e.data);
+        console.log(json);
         window.appendMessage(JSON.stringify(json));
     };
 
     sessionSocket.onclose = function(e) {
+        console.log(e);
         window.appendMessage("WebSocket closed.");
     };
 </script>
