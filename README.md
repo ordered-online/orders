@@ -75,7 +75,7 @@ You need to pass the verification session key and the verification user_id.
 |location_id|The id for the location.|
 |name|A unique name for the session, e.g. "Table 1" or "Customer XY".|
 
-Example product creation with `curl`:
+Example session creation with `curl`:
 
 ```
 curl -i -X POST -H 'Content-Type: application/json' -d '{
