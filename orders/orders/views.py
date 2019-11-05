@@ -12,6 +12,8 @@ from .models import Session, Order, SessionState
 
 
 class SuccessResponse(JsonResponse):
+    status_code = 200
+
     def __init__(self, response=None, *args, **kwargs):
         if response is None:
             super().__init__({
@@ -36,34 +38,42 @@ class AbstractFailureResponse(JsonResponse):
 
 class IncorrectAccessMethod(AbstractFailureResponse):
     reason = "incorrect_access_method"
+    status_code = 405
 
 
 class MalformedJson(AbstractFailureResponse):
     reason = "malformed_json"
+    status_code = 400
 
 
 class IncorrectCredentials(AbstractFailureResponse):
     reason = "incorrect_credentials"
+    status_code = 403
 
 
 class VerificationServiceUnavailable(AbstractFailureResponse):
     reason = "verification_service_unavailable"
+    status_code = 503
 
 
-class LocationServiceUnavailable(AbstractFailureResponse):
-    reason = "location_service_unavailable"
+class LocationsServiceUnavailable(AbstractFailureResponse):
+    reason = "locations_service_unavailable"
+    status_code = 503
 
 
 class CodeServiceUnavailable(AbstractFailureResponse):
     reason = "code_service_unavailable"
+    status_code = 503
 
 
 class SessionNotFound(AbstractFailureResponse):
     reason = "session_not_found"
+    status_code = 404
 
 
 class DuplicateSession(AbstractFailureResponse):
     reason = "duplicate_session"
+    status_code = 400
 
 
 def debug_session(request, session_code) -> TemplateResponse:
@@ -189,7 +199,7 @@ def create_session(request) -> JsonResponse:
     except ValueError:
         return IncorrectCredentials()
     except requests.ConnectionError:
-        return LocationServiceUnavailable()
+        return LocationsServiceUnavailable()
 
     try:
         code = fetch_code()

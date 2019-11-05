@@ -270,6 +270,8 @@ Following failure responses are supported:
 
 ### IncorrectCredentials
 
+Code: 403
+
 ```
 { 
    "success":false,
@@ -278,6 +280,8 @@ Following failure responses are supported:
 ```
 
 ### MalformedJson
+
+Code: 400
 
 ```
 {
@@ -288,6 +292,8 @@ Following failure responses are supported:
 
 ### SessionNotFound
 
+Code: 404
+
 ```
 {
     "success":false,
@@ -296,6 +302,8 @@ Following failure responses are supported:
 ```
 
 ### IncorrectAccessMethod
+
+Code: 405
 
 ```
 { 
@@ -306,6 +314,8 @@ Following failure responses are supported:
 
 ### VerificationServiceUnavailable
 
+Code: 503
+
 ```
 {
     "success":false,
@@ -314,6 +324,8 @@ Following failure responses are supported:
 ```
 
 ### LocationsServiceUnavailable
+
+Code: 503
 
 ```
 {
@@ -324,6 +336,8 @@ Following failure responses are supported:
 
 ### CodeServiceUnavailable
 
+Code: 503
+
 ```
 {
     "success":false,
@@ -332,6 +346,8 @@ Following failure responses are supported:
 ```
 
 ### DuplicateSession
+
+Code: 400
 
 ```
 {
