@@ -28,9 +28,11 @@ class SessionConsumer(WebsocketConsumer):
         self.send(text_data=json.dumps(self.session.dict_representation))
 
     def disconnect(self, code):
-        async_to_sync(self.channel_layer.group_discard)(
-            self.session.group_name, self.channel_name
-        )
+        # if no session was found, the session attribute will be None
+        if self.session:
+            async_to_sync(self.channel_layer.group_discard)(
+                self.session.group_name, self.channel_name
+            )
 
     def session_update(self, event):
         """
