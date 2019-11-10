@@ -76,9 +76,9 @@ class DuplicateSession(AbstractFailureResponse):
     status_code = 400
 
 
-def debug_session(request, session_code) -> TemplateResponse:
-    """Render a session to debug web sockets."""
-    return render(request, "orders/debug_session.html", {
+def monitor_session(request, session_code) -> TemplateResponse:
+    """Render a session to monitor web sockets."""
+    return render(request, "orders/monitor_session.html", {
         "session_code": session_code
     })
 

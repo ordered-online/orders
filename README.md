@@ -257,12 +257,12 @@ Failure Responses:
 - [SessionNotFound](#SessionNotFound) if a session with the given code could not be found.
 
 
-## Debugging with the supplied debug template
+## Monitoring orders with the supplied monitor template
 
-WebSocket connections can be hard to debug via command line. 
-To solve this problem, we supply a `debug_session` template with a basic websocket setup.
-Simply run the server with `DEBUG=1` and visit `/orders/sessions/debug/<session_code>/` after creating a session via command line.
-All updates should appear in the browser window and in the debug console.
+WebSocket connections can be hard to monitor via command line. 
+To solve this problem, we supply a `monitor_session` template with a basic websocket setup.
+Visit `/orders/sessions/monitor/<session_code>/` after creating a session via command line.
+All updates should appear in the browser window and in the browser's debug console.
 
 ## Failure Responses
 

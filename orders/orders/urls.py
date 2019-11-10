@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from . import settings, views
+from . import views
 
 
 urlpatterns = [
@@ -26,9 +26,5 @@ urlpatterns = [
     path('orders/sessions/get/<session_code>/', views.get_session, name="get_session"),
     path('orders/sessions/close/<session_code>/', views.close_session, name="close_session"),
     path('orders/create/', views.create_order, name="create_order"),
+    path('orders/sessions/monitor/<session_code>/', views.monitor_session, name="monitor_session")
 ]
-
-if settings.DEBUG:
-    urlpatterns.append(
-        path('orders/sessions/debug/<session_code>/', views.debug_session, name="debug_session")
-    )
