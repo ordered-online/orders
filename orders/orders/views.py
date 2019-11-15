@@ -16,14 +16,9 @@ class SuccessResponse(JsonResponse):
 
     def __init__(self, response=None, *args, **kwargs):
         if response is None:
-            super().__init__({
-                "success": True,
-            }, *args, **kwargs)
+            super().__init__({}, *args, **kwargs)
         else:
-            super().__init__({
-                "success": True,
-                "response": response
-            }, *args, **kwargs)
+            super().__init__(response, *args, **kwargs)
 
 
 class AbstractFailureResponse(JsonResponse):
@@ -31,7 +26,6 @@ class AbstractFailureResponse(JsonResponse):
 
     def __init__(self, *args, **kwargs):
         super().__init__({
-            "success": False,
             "reason": self.reason
         }, *args, **kwargs)
 
@@ -97,8 +91,8 @@ def verify_user(data: dict) -> tuple:
         "{}/verification/verify/".format(settings.VERIFICATION_SERVICE_URL),
         data=json.dumps({"session_key": session_key, "user_id": user_id})
     )
-    verification_data = response.json()
-    if verification_data.get("success") is not True:
+
+    if response.status_code is not 200:
         raise ValueError()
 
     return user_id, session_key
@@ -111,15 +105,16 @@ def verify_location_owner(user_id, location_id):
     response = requests.get("{}/locations/get/{}/".format(
         settings.LOCATIONS_SERVICE_URL, location_id
     ))
-    location_data = response.json()
-    if location_data.get("success") is not True:
+
+    if response.status_code is not 200:
         raise ValueError()
 
-    # unwrap the user_id from the location data
-    location_object = location_data.get("response")
-    if not location_object:
+    location_data = response.json()
+
+    if not location_data:
         raise ValueError()
-    location_user_id = location_object.get("user_id")
+
+    location_user_id = location_data.get("user_id")
     if not location_user_id:
         raise ValueError()
 
@@ -132,11 +127,14 @@ def fetch_code() -> str:
     response = requests.get("{}/codes/new/".format(
         settings.CODES_SERVICE_URL
     ))
-    code_data = response.json()
-    if code_data.get("success") is not True:
+
+    if response.status_code is not 200:
         raise ValueError()
+
+    code_data = response.json()
+
     try:
-        return code_data["response"]["value"]
+        return code_data["value"]
     except KeyError:
         raise ValueError()
 
