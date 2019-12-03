@@ -141,3 +141,7 @@ STATIC_URL = '/static/'
 VERIFICATION_SERVICE_URL = os.environ.get("VERIFICATION_SERVICE_URL", default="http://127.0.0.1:8000")
 LOCATIONS_SERVICE_URL = os.environ.get("LOCATIONS_SERVICE_URL", default="http://127.0.0.1:8001")
 CODES_SERVICE_URL = os.environ.get("CODES_SERVICE_URL", default="http://127.0.0.1:8003")
+
+# Setup support for proxy headers
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
