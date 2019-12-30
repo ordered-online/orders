@@ -216,8 +216,8 @@ def create_session(request) -> JsonResponse:
     return SuccessResponse(session.dict_representation)
 
 
-def create_order(request) -> JsonResponse:
-    """Create an order via POST."""
+def add_product_to_session(request) -> JsonResponse:
+    """Create an order for a product and add it to the session via POST."""
 
     if request.method != "POST":
         return IncorrectAccessMethod()

@@ -215,7 +215,7 @@ Failure Responses:
 - [IncorrectAccessMethod](#IncorrectAccessMethod) if the service was accessed with any other method than specified.
 - [SessionNotFound](#SessionNotFound) if the session could not be found.
 
-### Create orders with `/orders/create/`
+### Create orders with `/orders/products/add/`
 
 Create order for a given session.
 Methods: POST
@@ -231,7 +231,7 @@ Example request with `curl`:
 curl -i -X POST -H 'Content-Type: application/json' -d '{
     "product_id":1337,
     "session_code": "ac35940dff4d472ce4801a154de92406f3163565"
-}' http://127.0.0.1:8004/orders/create/
+}' http://127.0.0.1:8004/orders/products/add/
 
 {
    "code":"ac35940dff4d472ce4801a154de92406f3163565",
