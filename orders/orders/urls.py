@@ -25,6 +25,7 @@ urlpatterns = [
     path('orders/sessions/create/', views.create_session, name="create_session"),
     path('orders/sessions/get/<session_code>/', views.get_session, name="get_session"),
     path('orders/sessions/close/<session_code>/', views.close_session, name="close_session"),
+    path('orders/sessions/find/', views.find_session, name="find_session"),
     path('orders/products/add/', views.add_product_to_session, name="add_product_to_session"),
     path('orders/sessions/monitor/<session_code>/', views.monitor_session, name="monitor_session")
 ]

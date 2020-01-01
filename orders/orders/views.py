@@ -215,6 +215,32 @@ def create_session(request) -> JsonResponse:
 
     return SuccessResponse(session.dict_representation)
 
+def find_session(request) -> JsonResponse:
+    """Find sessions via GET."""
+
+    if request.method != "GET":
+        return IncorrectAccessMethod()
+
+    sessions = Session.objects.all()
+
+    location_id = request.GET.get("location_id")
+    if location_id:
+        sessions = sessions.filter(location_id__exact=location_id)
+
+    state = request.GET.get("state")
+    if state:
+        sessions = sessions.filter(state__exact=state)
+
+    sessions = sessions[:settings.MAX_RESULTS]
+
+    return SuccessResponse(
+        [
+            session.dict_representation
+            for session in sessions
+        ],
+        safe=False
+    )
+
 
 def add_product_to_session(request) -> JsonResponse:
     """Create an order for a product and add it to the session via POST."""

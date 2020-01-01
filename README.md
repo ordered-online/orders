@@ -215,6 +215,68 @@ Failure Responses:
 - [IncorrectAccessMethod](#IncorrectAccessMethod) if the service was accessed with any other method than specified.
 - [SessionNotFound](#SessionNotFound) if the session could not be found.
 
+### Find a order with `/orders/sessions/find/`
+
+Finds all sessions to the given parameters.
+Method: GET
+
+| Parameter   | Explanation                                                    |
+| ----------- | -------------------------------------------------------------- |
+| location_id | Search for sessions by a location id.                          |
+| state       | Search for sessions, whose state is either 'OPEN' or 'CLOSED'. |
+
+At least one of these parameters should be supplied. All parameters can be combined.
+Results are limited to 100 sessions.
+
+Example search with `curl`:
+
+```
+curl -i -X POST http://127.0.0.1:8004/orders/sessions/find/?location_id=1&state=open
+
+{
+   [
+      {
+         "code":"ac35940dff4d472ce4801a154de92406f3163565",
+         "name":"Table 1",
+         "location_id":1,
+         "state":"OPEN",
+         "timestamp":"2019-10-30T08:51:01.491347+00:00",
+         "orders":[
+            {
+               "id":2,
+               "product_id":1,
+               "session":"ac35940dff4d472ce4801a154de92406f3163565",
+               "timestamp":"2019-10-30T08:56:08.905087+00:00"
+            },
+            {
+               "id":3,
+               "product_id":1,
+               "session":"ac35940dff4d472ce4801a154de92406f3163565",
+               "timestamp":"2019-10-30T08:56:48.183929+00:00"
+            },
+            {
+               "id":4,
+               "product_id":1,
+               "session":"ac35940dff4d472ce4801a154de92406f3163565",
+               "timestamp":"2019-10-30T08:56:50.206426+00:00"
+            },
+            {
+               "id":5,
+               "product_id":2,
+               "session":"ac35940dff4d472ce4801a154de92406f3163565",
+               "timestamp":"2019-10-30T08:57:09.742687+00:00"
+            }
+         ]
+      },
+      ...
+   ]
+}
+```
+
+Failure Responses:
+
+- [IncorrectAccessMethod](#IncorrectAccessMethod) if the service was accessed with any other method than specified.
+
 ### Create orders with `/orders/products/add/`
 
 Create order for a given session.

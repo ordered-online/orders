@@ -138,6 +138,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MAX_RESULTS = 100
+
 VERIFICATION_SERVICE_URL = os.environ.get("VERIFICATION_SERVICE_URL", default="http://127.0.0.1:8000")
 LOCATIONS_SERVICE_URL = os.environ.get("LOCATIONS_SERVICE_URL", default="http://127.0.0.1:8001")
 CODES_SERVICE_URL = os.environ.get("CODES_SERVICE_URL", default="http://127.0.0.1:8003")
