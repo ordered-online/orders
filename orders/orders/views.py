@@ -232,7 +232,7 @@ def find_session(request) -> JsonResponse:
 
     state = request.GET.get("state")
     if state:
-        sessions = sessions.filter(state__exact=state)
+        sessions = sessions.filter(state__iexact=state)
 
     sessions = sessions[:settings.MAX_RESULTS]
 

@@ -231,7 +231,7 @@ Results are limited to 100 sessions.
 Example search with `curl`:
 
 ```
-curl -i -X POST http://127.0.0.1:8004/orders/sessions/find/?location_id=1&state=open
+curl -i -X GET http://127.0.0.1:8004/orders/sessions/find/?location_id=1\&state=open
 
 {
    [
