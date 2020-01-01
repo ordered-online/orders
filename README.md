@@ -362,6 +362,17 @@ Code: 404
 }
 ```
 
+### SessionClosed
+
+Code: 400
+
+```
+{
+    "success":false,
+    "reason":"session_closed"
+}
+```
+
 ### IncorrectAccessMethod
 
 Code: 405

@@ -69,6 +69,9 @@ class DuplicateSession(AbstractFailureResponse):
     reason = "duplicate_session"
     status_code = 400
 
+class SessionClosed(AbstractFailureResponse):
+    reason = "session_closed"
+    status_code = 400
 
 def monitor_session(request, session_code) -> TemplateResponse:
     """Render a session to monitor web sockets."""
@@ -262,6 +265,9 @@ def add_product_to_session(request) -> JsonResponse:
         session = Session.objects.get(pk=session_code)
     except Session.DoesNotExist:
         return SessionNotFound()
+
+    if session.state == SessionState.CLOSED.value:
+        return  SessionClosed()
 
     Order.objects.create(
         product_id=product_id,
