@@ -1,0 +1,57 @@
+[
+{
+  "model": "orders.session",
+  "pk": "0000000000000000000000000000000000000000",
+  "fields": {
+    "name": "Table 1",
+    "location_id": 1,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 2,
+  "fields": {
+    "product_id": 1,
+    "session": "0000000000000000000000000000000000000000",
+    "timestamp": "2020-01-21T14:33:51.935Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 3,
+  "fields": {
+    "product_id": 2,
+    "session": "0000000000000000000000000000000000000000",
+    "timestamp": "2020-01-21T14:33:51.935Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 4,
+  "fields": {
+    "product_id": 3,
+    "session": "0000000000000000000000000000000000000000",
+    "timestamp": "2020-01-21T14:33:51.936Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 5,
+  "fields": {
+    "product_id": 4,
+    "session": "0000000000000000000000000000000000000000",
+    "timestamp": "2020-01-21T14:33:51.936Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 6,
+  "fields": {
+    "product_id": 5,
+    "session": "0000000000000000000000000000000000000000",
+    "timestamp": "2020-01-21T14:33:51.937Z"
+  }
+}
+]
