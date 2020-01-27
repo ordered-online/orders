@@ -1,7 +1,167 @@
 [
 {
   "model": "orders.session",
-  "pk": "0000000000000000000000000000000000000000",
+  "pk": "000000",
+  "fields": {
+    "name": "Table 1",
+    "location_id": 1,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "587944",
+  "fields": {
+    "name": "Tisch 1",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "b1d179",
+  "fields": {
+    "name": "Tisch 2",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "cd2bd9",
+  "fields": {
+    "name": "Tisch 3",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "87c826",
+  "fields": {
+    "name": "Tisch 4",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "38f0f9",
+  "fields": {
+    "name": "Tisch 5",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "37a09d",
+  "fields": {
+    "name": "Tisch 6",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "aaeb6d",
+  "fields": {
+    "name": "Tisch 7",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "ce7ac4",
+  "fields": {
+    "name": "Tisch 8",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "9aa4cb",
+  "fields": {
+    "name": "Tisch 9",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "59b23a",
+  "fields": {
+    "name": "Tisch 10",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "f76c5e",
+  "fields": {
+    "name": "Tisch 11",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "a95d00",
+  "fields": {
+    "name": "Tisch 12",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "42e7fe",
+  "fields": {
+    "name": "Tisch 13",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "25da47",
+  "fields": {
+    "name": "Tisch 14",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "3e4b47",
+  "fields": {
+    "name": "Tisch 15",
+    "location_id": 2,
+    "state": "OPEN",
+    "timestamp": "2020-01-21T14:32:00.278Z"
+  }
+},
+{
+  "model": "orders.session",
+  "pk": "000000",
   "fields": {
     "name": "Table 1",
     "location_id": 1,
@@ -14,7 +174,7 @@
   "pk": 2,
   "fields": {
     "product_id": 1,
-    "session": "0000000000000000000000000000000000000000",
+    "session": "000000",
     "timestamp": "2020-01-21T14:33:51.935Z"
   }
 },
@@ -23,7 +183,7 @@
   "pk": 3,
   "fields": {
     "product_id": 2,
-    "session": "0000000000000000000000000000000000000000",
+    "session": "000000",
     "timestamp": "2020-01-21T14:33:51.935Z"
   }
 },
@@ -32,7 +192,7 @@
   "pk": 4,
   "fields": {
     "product_id": 3,
-    "session": "0000000000000000000000000000000000000000",
+    "session": "000000",
     "timestamp": "2020-01-21T14:33:51.936Z"
   }
 },
@@ -41,7 +201,7 @@
   "pk": 5,
   "fields": {
     "product_id": 4,
-    "session": "0000000000000000000000000000000000000000",
+    "session": "000000",
     "timestamp": "2020-01-21T14:33:51.936Z"
   }
 },
@@ -50,7 +210,7 @@
   "pk": 6,
   "fields": {
     "product_id": 5,
-    "session": "0000000000000000000000000000000000000000",
+    "session": "000000",
     "timestamp": "2020-01-21T14:33:51.937Z"
   }
 }
