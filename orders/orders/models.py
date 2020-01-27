@@ -20,7 +20,7 @@ class SessionState(Enum):
 
 class Session(models.Model):
     # mandatory fields
-    code = models.CharField(max_length=40, primary_key=True)
+    code = models.CharField(max_length=6, primary_key=True)
     name = models.TextField(max_length=200)
     location_id = models.IntegerField()
 
