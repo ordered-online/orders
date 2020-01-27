@@ -160,16 +160,6 @@
   }
 },
 {
-  "model": "orders.session",
-  "pk": "000000",
-  "fields": {
-    "name": "Table 1",
-    "location_id": 1,
-    "state": "OPEN",
-    "timestamp": "2020-01-21T14:32:00.278Z"
-  }
-},
-{
   "model": "orders.order",
   "pk": 2,
   "fields": {
